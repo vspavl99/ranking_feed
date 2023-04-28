@@ -1,0 +1,23 @@
+# dataset config : General Recommendation
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+load_col:
+    inter: [user_id, item_id]
+
+data_path: data/processed/MIND_dataset/
+benchmark_filename: ['train', 'dev', 'dev']
+
+worker: 1
+
+# Training and evaluation config
+train_batch_size: 10
+eval_step: 100
+epochs: 1
+save_dataloaders: True
+
+metrics: ['Precision', 'Recall', 'NDCG', 'MAP']
+topk: [1, 2, 4, 6, 8, 10]
+valid_metric: NDCG@10
+eval_args:
+    mode: uni10
+log_wandb: True

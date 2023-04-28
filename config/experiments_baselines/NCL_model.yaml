@@ -1,0 +1,21 @@
+# dataset config : General Recommendation
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+load_col:
+    inter: [user_id, item_id]
+
+data_path: data/processed/MIND_dataset/
+dataset: mind_small
+benchmark_filename: ['train', 'dev', 'dev']
+
+epochs: 100
+worker: 8
+
+group_by_user: True
+training_neg_sample_num: 1
+
+metrics: ['Precision', 'Recall', 'NDCG', 'MAP']
+topk: [1, 2, 4, 6, 8, 10]
+valid_metric: Recall@10
+
+log_wandb: True

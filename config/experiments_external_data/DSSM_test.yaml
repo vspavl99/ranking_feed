@@ -1,0 +1,35 @@
+# dataset config : General Recommendation
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+load_col:
+    inter: [user_id, item_id, label]
+    item: [item_id, 'embedding']
+
+numerical_features: ['embedding']
+
+discretization: {}
+data_path: data/processed/MIND_dataset/
+benchmark_filename: ['train', 'train', 'train']
+
+worker: 0
+use_gpu: False
+gpu_id: -1
+device: cpu
+
+
+# Training and evaluation config
+train_batch_size: 2048
+eval_step: 10
+epochs: 100
+embedding_size: 10
+mlp_hidden_size: [100, 100, 100]
+learning_rate: 0.1
+#save_dataloaders: True
+
+
+metrics: ['Precision', 'Recall', 'NDCG', 'MAP']
+topk: [1, 2, 4, 6, 8, 10]
+valid_metric: NDCG@10
+eval_args:
+    mode: uni10
+#log_wandb: True

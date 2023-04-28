@@ -1,0 +1,291 @@
+Sun 23 Apr 2023 13:10:30 INFO  ['C:\\Users\\vpavl\\PycharmProjects\\ranking-feed\\src\\models\\test.py']
+Sun 23 Apr 2023 13:10:30 INFO  
+General Hyper Parameters:
+gpu_id = 0
+use_gpu = True
+seed = 2020
+state = INFO
+reproducibility = True
+data_path = C:\Users\vpavl\AppData\Local\Programs\Python\Python39\Lib\site-packages\recbole\config\../dataset_example/ml-100k
+checkpoint_dir = saved
+show_progress = True
+save_dataset = False
+dataset_save_path = None
+save_dataloaders = False
+dataloaders_save_path = None
+log_wandb = False
+
+Training Hyper Parameters:
+epochs = 300
+train_batch_size = 2048
+learner = adam
+learning_rate = 0.001
+train_neg_sample_args = {'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}
+eval_step = 1
+stopping_step = 10
+clip_grad_norm = None
+weight_decay = 0.0
+loss_decimal_place = 4
+
+Evaluation Hyper Parameters:
+eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'RO', 'group_by': None, 'mode': 'labeled'}
+repeatable = False
+metrics = ['AUC', 'LogLoss']
+topk = [10]
+valid_metric = AUC
+valid_metric_bigger = True
+eval_batch_size = 4096
+metric_decimal_place = 4
+
+Dataset Hyper Parameters:
+field_separator = 	
+seq_separator =  
+USER_ID_FIELD = user_id
+ITEM_ID_FIELD = item_id
+RATING_FIELD = rating
+TIME_FIELD = timestamp
+seq_len = None
+LABEL_FIELD = label
+threshold = {'rating': 4}
+NEG_PREFIX = neg_
+load_col = {'inter': ['user_id', 'item_id', 'rating', 'timestamp'], 'user': ['user_id', 'age', 'gender', 'occupation'], 'item': ['item_id', 'release_year', 'class']}
+unload_col = None
+unused_col = None
+additional_feat_suffix = None
+rm_dup_inter = None
+val_interval = None
+filter_inter_by_user_or_item = True
+user_inter_num_interval = None
+item_inter_num_interval = None
+alias_of_user_id = None
+alias_of_item_id = None
+alias_of_entity_id = None
+alias_of_relation_id = None
+preload_weight = None
+normalize_field = None
+normalize_all = True
+ITEM_LIST_LENGTH_FIELD = item_length
+LIST_SUFFIX = _list
+MAX_ITEM_LIST_LENGTH = 50
+POSITION_FIELD = position_id
+HEAD_ENTITY_ID_FIELD = head_id
+TAIL_ENTITY_ID_FIELD = tail_id
+RELATION_ID_FIELD = relation_id
+ENTITY_ID_FIELD = entity_id
+kg_reverse_r = False
+entity_kg_num_interval = None
+relation_kg_num_interval = None
+benchmark_filename = None
+
+Other Hyper Parameters: 
+worker = 0
+wandb_project = recbole
+shuffle = True
+require_pow = False
+enable_amp = False
+enable_scaler = False
+transform = None
+embedding_size = 10
+mlp_hidden_size = [256, 256, 256]
+dropout_prob = 0.3
+double_tower = True
+numerical_features = []
+discretization = None
+MODEL_TYPE = ModelType.CONTEXT
+MODEL_INPUT_TYPE = InputType.POINTWISE
+eval_type = EvaluatorType.VALUE
+single_spec = True
+local_rank = 0
+device = cpu
+eval_neg_sample_args = {'distribution': 'none', 'sample_num': 'none'}
+
+
+Sun 23 Apr 2023 13:10:30 INFO  ml-100k
+The number of users: 944
+Average actions of users: 106.04453870625663
+The number of items: 1683
+Average actions of items: 59.45303210463734
+The number of inters: 100000
+The sparsity of the dataset: 93.70575143257098%
+Remain Fields: ['user_id', 'item_id', 'timestamp', 'age', 'gender', 'occupation', 'release_year', 'class', 'label']
+Sun 23 Apr 2023 13:10:30 INFO  [Training]: train_batch_size = [2048] train_neg_sample_args: [{'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}]
+Sun 23 Apr 2023 13:10:30 INFO  [Evaluation]: eval_batch_size = [4096] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'RO', 'group_by': None, 'mode': 'labeled'}]
+Sun 23 Apr 2023 13:10:30 INFO  DSSM(
+  (token_embedding_table): FMEmbedding(
+    (embedding): Embedding(2788, 10)
+  )
+  (token_seq_embedding_table): ModuleList(
+    (0): Embedding(20, 10)
+  )
+  (first_order_linear): FMFirstOrderLinear(
+    (token_embedding_table): FMEmbedding(
+      (embedding): Embedding(2788, 1)
+    )
+    (token_seq_embedding_table): ModuleList(
+      (0): Embedding(20, 1)
+    )
+  )
+  (user_mlp_layers): MLPLayers(
+    (mlp_layers): Sequential(
+      (0): Dropout(p=0.3, inplace=False)
+      (1): Linear(in_features=40, out_features=256, bias=True)
+      (2): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Tanh()
+      (4): Dropout(p=0.3, inplace=False)
+      (5): Linear(in_features=256, out_features=256, bias=True)
+      (6): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (7): Tanh()
+      (8): Dropout(p=0.3, inplace=False)
+      (9): Linear(in_features=256, out_features=256, bias=True)
+      (10): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (11): Tanh()
+    )
+  )
+  (item_mlp_layers): MLPLayers(
+    (mlp_layers): Sequential(
+      (0): Dropout(p=0.3, inplace=False)
+      (1): Linear(in_features=30, out_features=256, bias=True)
+      (2): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Tanh()
+      (4): Dropout(p=0.3, inplace=False)
+      (5): Linear(in_features=256, out_features=256, bias=True)
+      (6): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (7): Tanh()
+      (8): Dropout(p=0.3, inplace=False)
+      (9): Linear(in_features=256, out_features=256, bias=True)
+      (10): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (11): Tanh()
+    )
+  )
+  (loss): BCEWithLogitsLoss()
+  (sigmoid): Sigmoid()
+)
+Trainable parameters: 315561
+Sun 23 Apr 2023 13:10:30 INFO  FLOPs: 286328.0
+Sun 23 Apr 2023 13:10:36 INFO  epoch 0 training [time: 5.60s, train loss: 27.7533]
+Sun 23 Apr 2023 13:10:36 INFO  epoch 0 evaluating [time: 0.20s, valid_score: 0.553700]
+Sun 23 Apr 2023 13:10:36 INFO  valid result: 
+auc : 0.5537    logloss : 0.6886
+Sun 23 Apr 2023 13:10:36 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:10:42 INFO  epoch 1 training [time: 5.80s, train loss: 27.6640]
+Sun 23 Apr 2023 13:10:42 INFO  epoch 1 evaluating [time: 0.21s, valid_score: 0.560000]
+Sun 23 Apr 2023 13:10:42 INFO  valid result: 
+auc : 0.56    logloss : 0.6876
+Sun 23 Apr 2023 13:10:42 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:10:48 INFO  epoch 2 training [time: 5.85s, train loss: 27.4886]
+Sun 23 Apr 2023 13:10:48 INFO  epoch 2 evaluating [time: 0.22s, valid_score: 0.585100]
+Sun 23 Apr 2023 13:10:48 INFO  valid result: 
+auc : 0.5851    logloss : 0.6816
+Sun 23 Apr 2023 13:10:48 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:10:54 INFO  epoch 3 training [time: 5.55s, train loss: 27.1485]
+Sun 23 Apr 2023 13:10:54 INFO  epoch 3 evaluating [time: 0.17s, valid_score: 0.628200]
+Sun 23 Apr 2023 13:10:54 INFO  valid result: 
+auc : 0.6282    logloss : 0.6674
+Sun 23 Apr 2023 13:10:54 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:11:00 INFO  epoch 4 training [time: 5.93s, train loss: 26.4460]
+Sun 23 Apr 2023 13:11:00 INFO  epoch 4 evaluating [time: 0.24s, valid_score: 0.670200]
+Sun 23 Apr 2023 13:11:00 INFO  valid result: 
+auc : 0.6702    logloss : 0.649
+Sun 23 Apr 2023 13:11:00 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:11:06 INFO  epoch 5 training [time: 5.51s, train loss: 25.6535]
+Sun 23 Apr 2023 13:11:06 INFO  epoch 5 evaluating [time: 0.18s, valid_score: 0.694200]
+Sun 23 Apr 2023 13:11:06 INFO  valid result: 
+auc : 0.6942    logloss : 0.636
+Sun 23 Apr 2023 13:11:06 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:11:11 INFO  epoch 6 training [time: 5.27s, train loss: 25.0432]
+Sun 23 Apr 2023 13:11:11 INFO  epoch 6 evaluating [time: 0.20s, valid_score: 0.705700]
+Sun 23 Apr 2023 13:11:11 INFO  valid result: 
+auc : 0.7057    logloss : 0.6287
+Sun 23 Apr 2023 13:11:12 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:11:17 INFO  epoch 7 training [time: 5.94s, train loss: 24.6853]
+Sun 23 Apr 2023 13:11:18 INFO  epoch 7 evaluating [time: 0.21s, valid_score: 0.715200]
+Sun 23 Apr 2023 13:11:18 INFO  valid result: 
+auc : 0.7152    logloss : 0.6222
+Sun 23 Apr 2023 13:11:18 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:11:24 INFO  epoch 8 training [time: 6.13s, train loss: 24.3398]
+Sun 23 Apr 2023 13:11:24 INFO  epoch 8 evaluating [time: 0.20s, valid_score: 0.723700]
+Sun 23 Apr 2023 13:11:24 INFO  valid result: 
+auc : 0.7237    logloss : 0.6168
+Sun 23 Apr 2023 13:11:24 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:11:30 INFO  epoch 9 training [time: 5.53s, train loss: 24.1106]
+Sun 23 Apr 2023 13:11:30 INFO  epoch 9 evaluating [time: 0.19s, valid_score: 0.729700]
+Sun 23 Apr 2023 13:11:30 INFO  valid result: 
+auc : 0.7297    logloss : 0.6127
+Sun 23 Apr 2023 13:11:30 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:11:35 INFO  epoch 10 training [time: 5.06s, train loss: 23.9225]
+Sun 23 Apr 2023 13:11:35 INFO  epoch 10 evaluating [time: 0.18s, valid_score: 0.736800]
+Sun 23 Apr 2023 13:11:35 INFO  valid result: 
+auc : 0.7368    logloss : 0.6086
+Sun 23 Apr 2023 13:11:35 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:11:41 INFO  epoch 11 training [time: 5.56s, train loss: 23.7924]
+Sun 23 Apr 2023 13:11:41 INFO  epoch 11 evaluating [time: 0.23s, valid_score: 0.740600]
+Sun 23 Apr 2023 13:11:41 INFO  valid result: 
+auc : 0.7406    logloss : 0.606
+Sun 23 Apr 2023 13:11:41 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:11:46 INFO  epoch 12 training [time: 5.16s, train loss: 23.6469]
+Sun 23 Apr 2023 13:11:46 INFO  epoch 12 evaluating [time: 0.19s, valid_score: 0.744400]
+Sun 23 Apr 2023 13:11:46 INFO  valid result: 
+auc : 0.7444    logloss : 0.6037
+Sun 23 Apr 2023 13:11:46 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:11:51 INFO  epoch 13 training [time: 4.99s, train loss: 23.6002]
+Sun 23 Apr 2023 13:11:51 INFO  epoch 13 evaluating [time: 0.18s, valid_score: 0.748000]
+Sun 23 Apr 2023 13:11:51 INFO  valid result: 
+auc : 0.748    logloss : 0.6014
+Sun 23 Apr 2023 13:11:51 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:11:57 INFO  epoch 14 training [time: 5.41s, train loss: 23.4342]
+Sun 23 Apr 2023 13:11:57 INFO  epoch 14 evaluating [time: 0.19s, valid_score: 0.752500]
+Sun 23 Apr 2023 13:11:57 INFO  valid result: 
+auc : 0.7525    logloss : 0.599
+Sun 23 Apr 2023 13:11:57 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:12:02 INFO  epoch 15 training [time: 5.37s, train loss: 23.3675]
+Sun 23 Apr 2023 13:12:03 INFO  epoch 15 evaluating [time: 0.21s, valid_score: 0.756600]
+Sun 23 Apr 2023 13:12:03 INFO  valid result: 
+auc : 0.7566    logloss : 0.5966
+Sun 23 Apr 2023 13:12:03 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:12:08 INFO  epoch 16 training [time: 5.49s, train loss: 23.3011]
+Sun 23 Apr 2023 13:12:08 INFO  epoch 16 evaluating [time: 0.20s, valid_score: 0.759000]
+Sun 23 Apr 2023 13:12:08 INFO  valid result: 
+auc : 0.759    logloss : 0.595
+Sun 23 Apr 2023 13:12:08 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:12:13 INFO  epoch 17 training [time: 5.17s, train loss: 23.1907]
+Sun 23 Apr 2023 13:12:14 INFO  epoch 17 evaluating [time: 0.22s, valid_score: 0.760700]
+Sun 23 Apr 2023 13:12:14 INFO  valid result: 
+auc : 0.7607    logloss : 0.5937
+Sun 23 Apr 2023 13:12:14 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:12:19 INFO  epoch 18 training [time: 5.35s, train loss: 23.1447]
+Sun 23 Apr 2023 13:12:19 INFO  epoch 18 evaluating [time: 0.18s, valid_score: 0.762800]
+Sun 23 Apr 2023 13:12:19 INFO  valid result: 
+auc : 0.7628    logloss : 0.5925
+Sun 23 Apr 2023 13:12:19 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:12:25 INFO  epoch 19 training [time: 5.37s, train loss: 23.0832]
+Sun 23 Apr 2023 13:12:25 INFO  epoch 19 evaluating [time: 0.23s, valid_score: 0.765400]
+Sun 23 Apr 2023 13:12:25 INFO  valid result: 
+auc : 0.7654    logloss : 0.5913
+Sun 23 Apr 2023 13:12:25 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:12:30 INFO  epoch 20 training [time: 5.24s, train loss: 23.0512]
+Sun 23 Apr 2023 13:12:30 INFO  epoch 20 evaluating [time: 0.17s, valid_score: 0.766400]
+Sun 23 Apr 2023 13:12:30 INFO  valid result: 
+auc : 0.7664    logloss : 0.5906
+Sun 23 Apr 2023 13:12:30 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:12:36 INFO  epoch 21 training [time: 5.40s, train loss: 23.0407]
+Sun 23 Apr 2023 13:12:36 INFO  epoch 21 evaluating [time: 0.18s, valid_score: 0.765500]
+Sun 23 Apr 2023 13:12:36 INFO  valid result: 
+auc : 0.7655    logloss : 0.5908
+Sun 23 Apr 2023 13:12:41 INFO  epoch 22 training [time: 5.26s, train loss: 23.0153]
+Sun 23 Apr 2023 13:12:41 INFO  epoch 22 evaluating [time: 0.19s, valid_score: 0.768000]
+Sun 23 Apr 2023 13:12:41 INFO  valid result: 
+auc : 0.768    logloss : 0.5898
+Sun 23 Apr 2023 13:12:41 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:12:47 INFO  epoch 23 training [time: 5.41s, train loss: 22.9546]
+Sun 23 Apr 2023 13:12:47 INFO  epoch 23 evaluating [time: 0.20s, valid_score: 0.767800]
+Sun 23 Apr 2023 13:12:47 INFO  valid result: 
+auc : 0.7678    logloss : 0.5897
+Sun 23 Apr 2023 13:12:53 INFO  epoch 24 training [time: 5.73s, train loss: 22.9141]
+Sun 23 Apr 2023 13:12:53 INFO  epoch 24 evaluating [time: 0.18s, valid_score: 0.768300]
+Sun 23 Apr 2023 13:12:53 INFO  valid result: 
+auc : 0.7683    logloss : 0.5895
+Sun 23 Apr 2023 13:12:53 INFO  Saving current: saved\DSSM-Apr-23-2023_13-10-30.pth
+Sun 23 Apr 2023 13:12:59 INFO  epoch 25 training [time: 6.33s, train loss: 22.9285]
+Sun 23 Apr 2023 13:12:59 INFO  epoch 25 evaluating [time: 0.21s, valid_score: 0.768000]
+Sun 23 Apr 2023 13:12:59 INFO  valid result: 
+auc : 0.768    logloss : 0.5894
