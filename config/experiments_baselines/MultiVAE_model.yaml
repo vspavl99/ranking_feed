@@ -3,26 +3,22 @@ USER_ID_FIELD: user_id
 ITEM_ID_FIELD: item_id
 load_col:
     inter: [user_id, item_id]
-unused_col:
-    inter: [timestamp]
+
+data_path: data/processed/MIND_dataset/
+benchmark_filename: ['train', 'dev', 'dev']
 
 min_user_inter_num: 10
 min_item_inter_num: 10
 
-data_path: data/processed/MIND_dataset/
-dataset: mind_large
-benchmark_filename: ['train', 'dev', 'dev']
+#enable_amp: True
+train_batch_size: 1024
+eval_batch_size: 8096
+#save_dataloaders: True
+#save_dataset: True
 
-enable_amp: True
-train_batch_size: 1
-eval_batch_size: 1
-save_dataloaders: True
-save_dataset: True
-
-latent_dimension: 1
-mlp_hidden_size: [1]
+latent_dimension: 1024
+mlp_hidden_size: [2048]
 dropout_prob: 0.5
-
 
 learning_rate: 0.001
 eval_step: 25

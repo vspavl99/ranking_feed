@@ -31,9 +31,10 @@ def read_vec_file(path_to_file: str) -> List[tuple]:
 
 def match_news_and_embedding(
         news_dataframe: pd.DataFrame, embeddings: pd.DataFrame,
-        entity_name: str = 'title_entities', agg_func: Callable = random.choice, emb_as_string = True):
+        entity_name: str = 'title_entities', agg_func: Callable = random.choice, emb_as_string=True):
     """
     Create Dataframe with new_id and corresponding entity_id. (Entities specified by agg_func and entity_name)
+    :param emb_as_string: is save emb as string
     :param news_dataframe: dataframe with news additional data
     :param embeddings: dataframe with embeddings
     :param entity_name: title_entities or abstract_entities
@@ -51,7 +52,7 @@ def match_news_and_embedding(
             entity = agg_func(entities)
             try:
                 embedding = embeddings[embeddings['entity_id'] == entity['WikidataId']]['embedding'].values[0]
-            except Exception as e:
+            except IndexError:
                 print(entity['WikidataId'])
 
         if emb_as_string:
@@ -71,20 +72,20 @@ def save_emb_file(data, path):
 
 def save_emb_file_splitted_per_column(data, path):
     with open(path, 'w') as file:
-
-        file.write("item_id:token\t" + "\t".join([f"{i}:float" for i in range(len(list(map(float, data[0][1].split()))))]) + "\n")
+        file.write("item_id:token\t" + "\t".join(
+            [f"{i}:float" for i in range(len(list(map(float, data[0][1].split()))))]) + "\n")
         for row in data:
             file.write(f"{row[0]}\t" + "\t".join(data[0][1].split()) + "\n")
 
 
-def main(dataset_name='MINDsmall'):
+def create_item_data(dataset_name='MINDsmall', subsets=('train',)):
+    new_dataset_name = dataset_name[:4].lower() + '_' + dataset_name[4:]
     all_item_emb = []
-    for dataset_split in ['dev', 'train']:
 
-        new_dataset_name = dataset_name[:4].lower() + '_' + dataset_name[4:]
+    for dataset_split in subsets:
         embeddings = read_vec_file(f'data/raw/MIND_dataset/{dataset_name}_{dataset_split}/entity_embedding.vec')
         embeddings = pd.DataFrame(embeddings, columns=['entity_id', 'embedding'])
-        embeddings.to_csv(f'data/processed/MIND_dataset/{new_dataset_name}/entity_embedding.csv')
+        embeddings.to_csv(f'data/processed/MIND_dataset/{new_dataset_name}/entity_embedding.{dataset_split}.csv')
 
         news_info = pd.read_csv(
             filepath_or_buffer=f'data/raw/MIND_dataset/{dataset_name}_{dataset_split}/news.tsv',
@@ -100,10 +101,10 @@ def main(dataset_name='MINDsmall'):
         all_item_emb.extend(news_x_embedding)
 
     save_emb_file(all_item_emb, path=f'data/processed/MIND_dataset/{new_dataset_name}/{new_dataset_name}.item')
-    save_emb_file_splitted_per_column(all_item_emb, path=f'data/processed/MIND_dataset/{new_dataset_name}/{new_dataset_name}_columns.item')
+    save_emb_file_splitted_per_column(
+        all_item_emb, path=f'data/processed/MIND_dataset/{new_dataset_name}/{new_dataset_name}_columns.item'
+    )
 
 
 if __name__ == '__main__':
-    main()
-
-
+    create_item_data()

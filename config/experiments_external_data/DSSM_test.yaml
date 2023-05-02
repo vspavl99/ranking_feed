@@ -32,4 +32,5 @@ topk: [1, 2, 4, 6, 8, 10]
 valid_metric: NDCG@10
 eval_args:
     mode: uni10
+#    mode: full
 #log_wandb: True
